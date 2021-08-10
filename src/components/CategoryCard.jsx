@@ -3,17 +3,25 @@ import PropTypes from 'prop-types';
 
 class CategoryCard extends Component {
   render() {
-    const { name } = this.props;
+    const { name, id, filterOnClick } = this.props;
     return (
       <div>
-        <h2 data-testid="category">{name}</h2>
+        <button
+          type="submit"
+          onClick={ filterOnClick }
+          name={ id }
+          data-testid="category"
+        >
+          {name}
+        </button>
       </div>
     );
   }
 }
 
 CategoryCard.propTypes = {
-  name: PropTypes.string.isRequired,
-};
+  name: PropTypes.string,
+  key: PropTypes.number,
+}.isRequired;
 
 export default CategoryCard;

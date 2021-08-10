@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { getCategories } from '../services/api';
 import CategoryCard from './CategoryCard';
@@ -23,16 +24,28 @@ class Category extends Component {
 
   render() {
     const { categories } = this.state;
+    const { filterOnClick } = this.props;
     const loading = <h1>Carregando...</h1>;
 
     return (
       <div>
         <h2>Categorias Filtradas</h2>
         { (categories === undefined) ? loading : categories
-          .map(({ id, name }) => <CategoryCard key={ id } name={ name } />) }
+          .map(({ id, name }) => (
+            <CategoryCard
+              filterOnClick={ filterOnClick }
+              id={ id }
+              key={ id }
+              name={ name }
+            />
+          )) }
       </div>
     );
   }
 }
+
+Category.propTypes = {
+  filterOnClick: PropTypes.func.isRequired,
+};
 
 export default Category;

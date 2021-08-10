@@ -30,6 +30,25 @@
   color: #61dafb;
 }
 
+.main-content {
+  background-color: rgb(238, 238, 238);
+  float: right;
+  height: 100vh;
+  text-align: center;
+  width: 75%;
+}
+
+.aside-category {
+  background-color: rgb(224, 217, 217);
+  box-sizing: border-box;
+  display: inline-block;
+  height: 100vh;
+  overflow: auto;
+  padding-left: 20px;
+  position: fixed;
+  width: 25%;
+}
+
 @keyframes App-logo-spin {
 
   from {

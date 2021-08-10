@@ -7,12 +7,15 @@ import Cart from './components/Cart';
 
 function App() {
   return (
-    <div>
+    <div className="main">
       <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={ ProductList } />
-          <Route exact path="/cart" component={ Cart } />
-        </Switch>
+        <section className="aside-category"><Category /></section>
+        <section className="main-content">
+          <Switch>
+            <Route exact path="/" component={ ProductList } />
+            <Route className="cart" exact path="/cart" component={ Cart } />
+          </Switch>
+        </section>
       </BrowserRouter>
     </div>
   );

@@ -1,5 +1,5 @@
 export async function getCategories() {
-  const request = await fetch('https://api.mercadolibre.com/sites/MLB/categories');
+  const request = await fetch('https://api.mercadolibre.com/sites/MLB/categories', { header: { mode: 'no-cors' } });
   const json = await request.json();
   return json;
 }

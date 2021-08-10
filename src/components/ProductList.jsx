@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import Search from './Search';
+
+import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+
+import Search from './Search';
 import ProductCard from './ProductCard';
 
 class ProductList extends Component {
@@ -48,6 +51,9 @@ class ProductList extends Component {
         >
           Pesquisar
         </button>
+        <Link to="/cart" data-testid="shopping-cart-button">
+          <span role="img" aria-label="emoji-cart">🛒</span>
+        </Link>
         <section>
           { (loading) ? <Search /> : allProducts
             .map(({ id, title, price, thumbnail }) => (<ProductCard

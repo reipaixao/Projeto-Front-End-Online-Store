@@ -5,6 +5,7 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 import Search from './Search';
 import ProductCard from './ProductCard';
 import CartButton from './CartButton';
+import Category from './Category';
 
 class ProductList extends Component {
   constructor(props) {
@@ -26,10 +27,21 @@ class ProductList extends Component {
     this.reqProducts();
   }
 
+  filterHandleClick = async ({ target: { name: id } }) => {
+    const { search } = this.state;
+    const request = await getProductsFromCategoryAndQuery(search, id);
+    this.setState(() => ({ allProducts: request.results }), () => {
+      this.setState(() => ({ loading: false }));
+    });
+  }
+
   reqProducts = async () => {
     const { search } = this.state;
     const request = await getProductsFromCategoryAndQuery(search);
-    this.setState(() => ({ allProducts: request.results }), () => {
+    this.setState(() => ({
+      allProducts: request.results,
+      loading: true,
+    }), () => {
       this.setState(() => ({ loading: false }));
     });
   }
@@ -38,6 +50,7 @@ class ProductList extends Component {
     const { allProducts, loading } = this.state;
     return (
       <div>
+        <Category filterOnClick={ this.filterHandleClick } />
         <input
           data-testid="query-input"
           name="search"

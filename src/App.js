@@ -1,14 +1,13 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Search from './components/Search';
+import ProductList from './components/ProductList';
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ Search } />
+          <Route exact path="/" component={ ProductList } />
         </Switch>
       </BrowserRouter>
     </div>

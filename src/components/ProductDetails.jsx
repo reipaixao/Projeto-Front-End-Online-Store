@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Forms from './Forms';
 
 class ProductDetails extends Component {
   render() {
@@ -21,6 +22,7 @@ class ProductDetails extends Component {
             </ul>
           </nav>
         </section>
+        <Forms />
       </div>
     );
   }

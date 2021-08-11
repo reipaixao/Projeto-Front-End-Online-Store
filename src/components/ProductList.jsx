@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
@@ -13,7 +14,7 @@ class ProductList extends Component {
 
     this.state = {
       loading: true,
-      allProducts: undefined,
+      allProducts: [],
       search: '',
     };
   }
@@ -72,12 +73,18 @@ class ProductList extends Component {
           </section>
           <section>
             { (loading) ? <Search /> : allProducts
-              .map(({ id, title, price, thumbnail }) => (<ProductCard
-                key={ id }
-                title={ title }
-                price={ price }
-                image={ thumbnail }
-              />)) }
+              .map((product) => (
+                <Link
+                  to={ {
+                    pathname: `/details/${product.id}`,
+                    state: { product },
+                  } }
+                  key={ product.id }
+                  data-testid="product-detail-link"
+                >
+                  <ProductCard product={ product } />
+                </Link>
+              )) }
           </section>
         </div>
       </div>

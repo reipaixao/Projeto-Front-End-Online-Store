@@ -1,0 +1,37 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+class ProductDetails extends Component {
+  render() {
+    const { location: { state: { product: {
+      title, thumbnail, tags, price,
+    } } } } = this.props;
+    return (
+      <div>
+        <h1 data-testid="product-detail-name">{title}</h1>
+        <img src={ thumbnail } alt={ title } />
+        <h4>{`R$ ${price}`}</h4>
+        <section>
+          <h3>Detalhe do produto:</h3>
+          <nav>
+            <ul>
+              <li>{tags[0]}</li>
+              <li>{tags[1]}</li>
+              <li>{tags[2]}</li>
+            </ul>
+          </nav>
+        </section>
+      </div>
+    );
+  }
+}
+
+ProductDetails.propTypes = {
+  location: PropTypes.shape({
+    state: { allInformations: {
+      title: PropTypes.string,
+    } },
+  }).isRequired,
+};
+
+export default ProductDetails;

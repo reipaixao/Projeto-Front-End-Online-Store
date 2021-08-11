@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import AddToCart from './AddToCart';
 
@@ -22,7 +23,8 @@ class ProductDetails extends Component {
               <li>{tags[2]}</li>
             </ul>
           </nav>
-          <AddToCart product={ product } />
+          <AddToCart data-testid="shopping-cart-product-name" product={ product } />
+          <Link to="/">Voltar</Link>
         </section>
       </div>
     );

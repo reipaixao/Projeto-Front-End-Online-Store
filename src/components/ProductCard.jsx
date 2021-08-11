@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 
 class ProductCard extends Component {
   render() {
-    const { title, image, price } = this.props;
+    const { product: {
+      title, thumbnail, price,
+    } } = this.props;
     return (
       <div data-testid="product">
-        <h1>{title}</h1>
-        <img src={ image } alt={ title } />
+        <h1>{ title }</h1>
+        <img src={ thumbnail } alt={ title } />
         <span>{`R$ ${price}`}</span>
       </div>
     );

@@ -4,17 +4,23 @@ import './Forms.css';
 class Forms extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = { value: '' };
+    this.state = { value: '' };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange = (event) => {
-    // this.setState({ value: event.target.value });
-    console.log(event.target.value);
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
+    console.log(value);
   };
 
+  handleSubmit = () => {
+    console.log('Você clicou em enviar.');
+  }
+
   render() {
+    const { value } = this.state;
     return (
       <div>
         <form className="forms">
@@ -23,14 +29,14 @@ class Forms extends React.Component {
           Avalie o Produto:
           <textarea
             data-testid="product-detail-evaluation"
-            // value={ this.state.value }
+            value={ value }
             onChange={ this.handleChange }
-            name="avl"
+            name="value"
             cols="30"
             rows="10"
           />
         </form>
-        <input type="submit" value="Enviar" />
+        <input onClick={ this.handleSubmit } type="submit" value="Enviar" />
       </div>
     );
   }

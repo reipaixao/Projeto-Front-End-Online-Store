@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import AddToCart from './AddToCart';
+
 class ProductDetails extends Component {
   render() {
-    const { location: { state: { product: {
+    const { location: { state: { product, product: {
       title, thumbnail, tags, price,
     } } } } = this.props;
     return (
@@ -20,6 +22,7 @@ class ProductDetails extends Component {
               <li>{tags[2]}</li>
             </ul>
           </nav>
+          <AddToCart product={ product } />
         </section>
       </div>
     );

@@ -49,31 +49,37 @@ class ProductList extends Component {
   render() {
     const { allProducts, loading } = this.state;
     return (
-      <div>
-        <Category filterOnClick={ this.filterHandleClick } />
-        <input
-          data-testid="query-input"
-          name="search"
-          onChange={ this.handleChange }
-          type="text"
-        />
-        <button
-          data-testid="query-button"
-          type="submit"
-          onClick={ this.handleClick }
-        >
-          Pesquisar
-        </button>
-        <CartButton />
-        <section>
-          { (loading) ? <Search /> : allProducts
-            .map(({ id, title, price, thumbnail }) => (<ProductCard
-              key={ id }
-              title={ title }
-              price={ price }
-              image={ thumbnail }
-            />)) }
+      <div className="main-content">
+        <section className="aside-category">
+          <Category filterOnClick={ this.filterHandleClick } />
         </section>
+        <div>
+          <section className="search_container">
+            <input
+              data-testid="query-input"
+              name="search"
+              onChange={ this.handleChange }
+              type="text"
+            />
+            <button
+              data-testid="query-button"
+              type="submit"
+              onClick={ this.handleClick }
+            >
+              Pesquisar
+            </button>
+            <CartButton />
+          </section>
+          <section>
+            { (loading) ? <Search /> : allProducts
+              .map(({ id, title, price, thumbnail }) => (<ProductCard
+                key={ id }
+                title={ title }
+                price={ price }
+                image={ thumbnail }
+              />)) }
+          </section>
+        </div>
       </div>
     );
   }

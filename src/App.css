@@ -1,20 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-
-}
-
 .App-header {
   align-items: center;
   background-color: #282c34;
@@ -32,21 +15,19 @@
 
 .main-content {
   background-color: rgb(238, 238, 238);
-  float: right;
+  display: flex;
   height: 100vh;
-  text-align: center;
-  width: 75%;
 }
 
 .aside-category {
   background-color: rgb(224, 217, 217);
-  box-sizing: border-box;
-  display: inline-block;
+  display: flex;
   height: 100vh;
-  overflow: auto;
-  padding-left: 20px;
-  position: fixed;
-  width: 25%;
+}
+
+.search_container {
+  display: flex;
+  height: 3vh;
 }
 
 @keyframes App-logo-spin {

@@ -7,14 +7,23 @@ import Forms from './Forms';
 import CartButton from './CartButton';
 
 class ProductDetails extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      counter: JSON.parse(localStorage.getItem('counter')),
+    };
+  }
+
   render() {
     const { location: { state: { product, product: {
       title, thumbnail, tags, price, shipping,
     } } } } = this.props;
+    const { counter } = this.state;
     const freeShippingTag = <span data-testid="free-shipping">Frete grátis!</span>;
     return (
       <div>
-        <CartButton />
+        <CartButton counter={ counter } />
         <h1 data-testid="product-detail-name">{title}</h1>
         { shipping.free_shipping && freeShippingTag }
         <img src={ thumbnail } alt={ title } />
@@ -29,6 +38,7 @@ class ProductDetails extends Component {
             </ul>
           </nav>
           <AddToCart
+            // upda
             dataId="product-detail-add-to-cart"
             product={ product }
           />

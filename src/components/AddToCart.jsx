@@ -47,6 +47,8 @@ class AddToCart extends React.Component {
 
   addProduct = () => {
     const { emptyInventory } = this.state;
+    const { updateCounter } = this.props;
+    updateCounter();
     this.addCounterStorage();
     if (!emptyInventory) {
       const { product } = this.props;

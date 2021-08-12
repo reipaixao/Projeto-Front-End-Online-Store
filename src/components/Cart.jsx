@@ -145,7 +145,6 @@ class Cart extends React.Component {
           {/*
             <AddToCart product={ () => this.findProduct(id) } dataId="product-add-to-cart" />
           */}
-          <Link to="/checkout">Comprar</Link>
         </div>
       );
     }));
@@ -159,6 +158,7 @@ class Cart extends React.Component {
     return (
       <div>
         {(!cartArray || cartArray.length === 0) ? empty : this.mapStorage(cartArray)}
+        <Link data-testid="checkout-products" to="/checkout">Comprar</Link>
         <Link to="/">Voltar.</Link>
       </div>
     );

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
@@ -20,15 +19,8 @@ class ProductList extends Component {
     };
   }
 
-  componentDidMount() {
-    this.setCounterStorage();
-  }
-
-  setCounterStorage = () => {
-    const counterStorage = JSON.parse(localStorage.getItem('counter'));
-    if (!counterStorage) {
-      localStorage.setItem('counter', '0');
-    }
+  updateCounter = () => {
+    this.setState(() => ({ counter: JSON.parse(localStorage.getItem('counter')) }));
   }
 
   handleChange = ({ target: { name, value } }) => {
@@ -81,24 +73,16 @@ class ProductList extends Component {
             >
               Pesquisar
             </button>
-            <div>
-              <CartButton data-testid="shopping-cart-button" />
-              <span data-testid="shopping-cart-size">{ counter }</span>
-            </div>
+            <CartButton counter={ counter } data-testid="shopping-cart-button" />
           </section>
           <section>
             { (loading) ? <Search /> : allProducts
               .map((product) => (
-                <Link
-                  to={ {
-                    pathname: `/details/${product.id}`,
-                    state: { product },
-                  } }
+                <ProductCard
+                  updateCounter={ this.updateCounter }
                   key={ product.id }
-                  data-testid="product-detail-link"
-                >
-                  <ProductCard product={ product } />
-                </Link>
+                  product={ product }
+                />
               )) }
           </section>
         </div>

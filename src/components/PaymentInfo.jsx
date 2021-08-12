@@ -5,7 +5,7 @@ class PaymentInfo extends Component {
     return (
       <div>
         <form>
-          
+          <h2>Aguardando criação dos componentes</h2>
         </form>
       </div>
     );

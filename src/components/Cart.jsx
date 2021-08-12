@@ -98,6 +98,7 @@ class Cart extends React.Component {
     }));
   }
 
+  // Requisito 14
   // findProduct = (idParam) => {
   //   const { cartArray } = this.state;
   //   return cartArray.find(({ id }) => id === idParam);
@@ -105,38 +106,49 @@ class Cart extends React.Component {
 
   mapStorage = (cartArray) => {
     const { cartCounter } = this.state;
-    return (cartArray.map(({ title, id, thumbnail }, index) => (
-      <div key={ id }>
-        <h2 data-testid="shopping-cart-product-name">{title}</h2>
-        <button data-id={ id } onClick={ this.removeProduct } type="submit">X</button>
-        <img src={ thumbnail } alt={ title } />
-        <span data-testid="shopping-cart-product-quantity">
-          {`Quantidade: ${cartCounter[index][1]}`}
-        </span>
-        <button
-          data-testid="product-decrease-quantity"
-          name="subtract"
-          data-id={ id }
-          onClick={ this.addOrSubProduct }
-          type="submit"
-        >
-          -
-        </button>
-        <button
-          data-testid="product-increase-quantity"
-          name="add"
-          data-id={ id }
-          onClick={ this.addOrSubProduct }
-          type="submit"
-        >
-          +
-        </button>
-        {/*
-          <AddToCart product={ () => this.findProduct(id) } dataId="product-add-to-cart" />
-        */}
-        <Link to="/checkout">Comprar</Link>
-      </div>
-    )));
+    return (cartArray.map((product, index) => {
+      const { title, id, thumbnail } = product;
+      return (
+        <div key={ id }>
+          <h2 data-testid="shopping-cart-product-name">{title}</h2>
+          <button data-id={ id } onClick={ this.removeProduct } type="submit">X</button>
+          <img src={ thumbnail } alt={ title } />
+          <span data-testid="shopping-cart-product-quantity">
+            {`Quantidade: ${cartCounter[index][1]}`}
+          </span>
+          <Link
+            to={ {
+              pathname: `/details/${id}`,
+              state: { product },
+            } }
+          >
+            Detalhes
+          </Link>
+          <button
+            data-testid="product-decrease-quantity"
+            name="subtract"
+            data-id={ id }
+            onClick={ this.addOrSubProduct }
+            type="submit"
+          >
+            -
+          </button>
+          <button
+            data-testid="product-increase-quantity"
+            name="add"
+            data-id={ id }
+            onClick={ this.addOrSubProduct }
+            type="submit"
+          >
+            +
+          </button>
+          {/*
+            <AddToCart product={ () => this.findProduct(id) } dataId="product-add-to-cart" />
+          */}
+          <Link to="/checkout">Comprar</Link>
+        </div>
+      );
+    }));
   }
 
   render() {

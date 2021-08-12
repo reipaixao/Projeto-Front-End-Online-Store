@@ -30,7 +30,6 @@ class ProductDetails extends Component {
           </nav>
           <AddToCart
             dataId="product-detail-add-to-cart"
-            data-testid="shopping-cart-product-name"
             product={ product }
           />
           <Link to="/">Voltar</Link>

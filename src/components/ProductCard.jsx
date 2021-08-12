@@ -15,7 +15,7 @@ class ProductCard extends Component {
         { shipping.free_shipping && freeShippingTag }
         <img src={ thumbnail } alt={ title } />
         <span>{`R$ ${price}`}</span>
-        <AddToCart product={ product } />
+        <AddToCart dataId="product-add-to-cart" product={ product } />
       </div>
     );
   }

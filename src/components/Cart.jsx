@@ -9,7 +9,12 @@ class Cart extends React.Component {
       cartArray: JSON.parse(localStorage.getItem('cartArray')),
       cartCounter: JSON.parse(localStorage.getItem('arrayCounter')),
       counter: JSON.parse(localStorage.getItem('counter')),
+      inventory: [],
     };
+  }
+
+  componentDidMount() {
+    this.settingInventory();
   }
 
   componentDidUpdate() {
@@ -17,11 +22,39 @@ class Cart extends React.Component {
     localStorage.setItem('counter', JSON.stringify(counter));
   }
 
+  settingInventory = () => {
+    const { cartArray, cartCounter } = this.state;
+    if (cartArray) {
+      const allinventory = cartArray
+        .map((product, index) => (
+          [product.id, (product.available_quantity - cartCounter[index][1])]
+        ));
+      this.setState(() => ({ inventory: allinventory }));
+    }
+  }
+
+  addOrSubInventory = ({ target }) => {
+    const { inventory } = this.state;
+    const id = target.getAttribute('data-id');
+    const findIndex = inventory
+      .map((a, i) => [a, i])
+      .find((element) => element[0][0] === id)[1];
+    if (target.name === 'add') {
+      inventory[findIndex][1] -= 1;
+    } else {
+      inventory[findIndex][1] += 1;
+    }
+    // if (inventory[findIndex][1] === ) {
+
+    // }
+  }
+
   addOrSubProduct = (event) => {
     const { target, target: { name } } = event;
     const id = target.getAttribute('data-id');
     const arrayCounter = JSON.parse(localStorage.getItem('arrayCounter'));
     const arrayFound = arrayCounter.find((idAndCounter) => idAndCounter[0] === id);
+    this.addOrSubInventory(event);
     if (name === 'add') {
       arrayFound[1] += 1;
       this.setState(({ counter }) => ({ counter: counter + 1 }));

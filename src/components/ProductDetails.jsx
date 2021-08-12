@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import AddToCart from './AddToCart';
 import Forms from './Forms';
+import CartButton from './CartButton';
 
 class ProductDetails extends Component {
   render() {
@@ -13,6 +14,7 @@ class ProductDetails extends Component {
     const freeShippingTag = <span data-testid="free-shipping">Frete grátis!</span>;
     return (
       <div>
+        <CartButton />
         <h1 data-testid="product-detail-name">{title}</h1>
         { shipping.free_shipping && freeShippingTag }
         <img src={ thumbnail } alt={ title } />
@@ -26,7 +28,11 @@ class ProductDetails extends Component {
               <li>{tags[2]}</li>
             </ul>
           </nav>
-          <AddToCart data-testid="shopping-cart-product-name" product={ product } />
+          <AddToCart
+            dataId="product-detail-add-to-cart"
+            data-testid="shopping-cart-product-name"
+            product={ product }
+          />
           <Link to="/">Voltar</Link>
         </section>
         <Forms />

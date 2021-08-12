@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class AddToCart extends React.Component {
+  addCounterStorage = () => {
+    let counter = JSON.parse(localStorage.getItem('counter'));
+    counter += 1;
+    localStorage.setItem('counter', counter);
+  }
+
   createCounter = (id) => {
     let arrayCounter = localStorage.getItem('arrayCounter');
     if (!arrayCounter) {
@@ -26,6 +32,7 @@ class AddToCart extends React.Component {
   }
 
   addProduct = () => {
+    this.addCounterStorage();
     const { product } = this.props;
     let cartStorage = localStorage.getItem('cartArray');
     if (!cartStorage) {
@@ -47,6 +54,7 @@ class AddToCart extends React.Component {
     return (
       <div>
         <button
+          data-testid="product-add-to-cart"
           type="submit"
           onClick={ this.addProduct }
         >

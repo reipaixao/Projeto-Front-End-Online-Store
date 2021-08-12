@@ -6,11 +6,13 @@ import AddToCart from './AddToCart';
 class ProductCard extends Component {
   render() {
     const { product, product: {
-      title, thumbnail, price,
+      title, thumbnail, price, shipping,
     } } = this.props;
+    const freeShippingTag = <span data-testid="free-shipping">Frete grátis!</span>;
     return (
       <div data-testid="product">
         <h1>{ title }</h1>
+        { shipping.free_shipping && freeShippingTag }
         <img src={ thumbnail } alt={ title } />
         <span>{`R$ ${price}`}</span>
         <AddToCart product={ product } />

@@ -8,7 +8,13 @@ class Cart extends React.Component {
     this.state = {
       cartArray: JSON.parse(localStorage.getItem('cartArray')),
       cartCounter: JSON.parse(localStorage.getItem('arrayCounter')),
+      counter: JSON.parse(localStorage.getItem('counter')),
     };
+  }
+
+  componentDidUpdate() {
+    const { counter } = this.state;
+    localStorage.setItem('counter', JSON.stringify(counter));
   }
 
   addOrSubProduct = (event) => {
@@ -18,8 +24,12 @@ class Cart extends React.Component {
     const arrayFound = arrayCounter.find((idAndCounter) => idAndCounter[0] === id);
     if (name === 'add') {
       arrayFound[1] += 1;
+      this.setState(({ counter }) => ({ counter: counter + 1 }));
     } else {
       arrayFound[1] -= 1;
+      if (arrayFound[1] !== 0) {
+        this.setState(({ counter }) => ({ counter: counter - 1 }));
+      }
     }
     if (arrayFound[1] === 0) {
       this.removeProduct(event);
@@ -42,6 +52,8 @@ class Cart extends React.Component {
     const findIndex = arrayCounter
       .map((a, i) => [a, i])
       .find((element) => element[0][0] === id)[1];
+    const counterReduce = arrayCounter[findIndex][1];
+    this.setState(({ counter }) => ({ counter: counter - counterReduce }));
     arrayCounter.splice(findIndex, 1);
     cartArray.splice(findIndex, 1);
     localStorage.setItem('arrayCounter', JSON.stringify(arrayCounter));

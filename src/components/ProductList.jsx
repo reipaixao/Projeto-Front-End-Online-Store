@@ -16,7 +16,19 @@ class ProductList extends Component {
       loading: true,
       allProducts: [],
       search: '',
+      counter: JSON.parse(localStorage.getItem('counter')),
     };
+  }
+
+  componentDidMount() {
+    this.setCounterStorage();
+  }
+
+  setCounterStorage = () => {
+    const counterStorage = JSON.parse(localStorage.getItem('counter'));
+    if (!counterStorage) {
+      localStorage.setItem('counter', '0');
+    }
   }
 
   handleChange = ({ target: { name, value } }) => {
@@ -48,7 +60,7 @@ class ProductList extends Component {
   }
 
   render() {
-    const { allProducts, loading } = this.state;
+    const { allProducts, loading, counter } = this.state;
     return (
       <div className="main-content">
         <section className="aside-category">
@@ -69,7 +81,10 @@ class ProductList extends Component {
             >
               Pesquisar
             </button>
-            <CartButton />
+            <div>
+              <CartButton data-testid="shopping-cart-button" />
+              <span data-testid="shopping-cart-size">{ counter }</span>
+            </div>
           </section>
           <section>
             { (loading) ? <Search /> : allProducts

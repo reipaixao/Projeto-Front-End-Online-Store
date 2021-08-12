@@ -8,11 +8,13 @@ import Forms from './Forms';
 class ProductDetails extends Component {
   render() {
     const { location: { state: { product, product: {
-      title, thumbnail, tags, price,
+      title, thumbnail, tags, price, shipping,
     } } } } = this.props;
+    const freeShippingTag = <span data-testid="free-shipping">Frete grátis!</span>;
     return (
       <div>
         <h1 data-testid="product-detail-name">{title}</h1>
+        { shipping.free_shipping && freeShippingTag }
         <img src={ thumbnail } alt={ title } />
         <h4>{`R$ ${price}`}</h4>
         <section>

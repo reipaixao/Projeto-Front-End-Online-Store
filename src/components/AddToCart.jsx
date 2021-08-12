@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class AddToCart extends React.Component {
-  addCounter = (id) => {
+  createCounter = (id) => {
     let arrayCounter = localStorage.getItem('arrayCounter');
     if (!arrayCounter) {
       localStorage.setItem('arrayCounter', '[]');
@@ -14,7 +14,7 @@ class AddToCart extends React.Component {
     localStorage.setItem('arrayCounter', JSON.stringify(arrayCounter));
   }
 
-  addSumCounter = (id) => {
+  addCounter = (id) => {
     const arrayCounter = JSON.parse(localStorage.getItem('arrayCounter'));
     const arrayFound = arrayCounter.find((idAndCounter) => idAndCounter[0] === id);
     arrayFound[1] += 1;
@@ -35,11 +35,11 @@ class AddToCart extends React.Component {
     cartStorage = JSON.parse(localStorage.getItem('cartArray'));
     const productFound = cartStorage.find(({ id }) => id === product.id);
     if (productFound) {
-      this.addSumCounter(productFound.id);
+      this.addCounter(productFound.id);
     } else {
       const cartArray = [...cartStorage, product];
       localStorage.setItem('cartArray', JSON.stringify(cartArray));
-      this.addCounter(product.id);
+      this.createCounter(product.id);
     }
   }
 

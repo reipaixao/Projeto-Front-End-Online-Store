@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+import AddToCart from './AddToCart';
 import Forms from './Forms';
 
 class ProductDetails extends Component {
   render() {
-    const { location: { state: { product: {
+    const { location: { state: { product, product: {
       title, thumbnail, tags, price,
     } } } } = this.props;
     return (
@@ -21,6 +24,8 @@ class ProductDetails extends Component {
               <li>{tags[2]}</li>
             </ul>
           </nav>
+          <AddToCart data-testid="shopping-cart-product-name" product={ product } />
+          <Link to="/">Voltar</Link>
         </section>
         <Forms />
       </div>

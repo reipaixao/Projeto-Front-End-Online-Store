@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import AddToCart from './AddToCart';
+
 class ProductCard extends Component {
   render() {
-    const { product: {
+    const { product, product: {
       title, thumbnail, price,
     } } = this.props;
     return (
@@ -11,6 +13,7 @@ class ProductCard extends Component {
         <h1>{ title }</h1>
         <img src={ thumbnail } alt={ title } />
         <span>{`R$ ${price}`}</span>
+        <AddToCart product={ product } />
       </div>
     );
   }

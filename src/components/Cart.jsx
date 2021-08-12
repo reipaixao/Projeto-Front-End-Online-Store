@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import AddToCart from './AddToCart';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -97,6 +98,11 @@ class Cart extends React.Component {
     }));
   }
 
+  // findProduct = (idParam) => {
+  //   const { cartArray } = this.state;
+  //   return cartArray.find(({ id }) => id === idParam);
+  // }
+
   mapStorage = (cartArray) => {
     const { cartCounter } = this.state;
     return (cartArray.map(({ title, id, thumbnail }, index) => (
@@ -125,6 +131,10 @@ class Cart extends React.Component {
         >
           +
         </button>
+        {/*
+          <AddToCart product={ () => this.findProduct(id) } dataId="product-add-to-cart" />
+        */}
+        <Link to="/checkout">Comprar</Link>
       </div>
     )));
   }

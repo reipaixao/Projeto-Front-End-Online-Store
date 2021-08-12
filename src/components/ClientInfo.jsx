@@ -6,7 +6,7 @@ const arrayOfStates = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES',
   'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO',
 ];
 
-export default class FinishPurchase extends Component {
+export default class ClientInfo extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -71,6 +71,6 @@ export default class FinishPurchase extends Component {
   }
 }
 
-FinishPurchase.propTypes = {
+ClientInfo.propTypes = {
   onChange: PropTypes.func.isRequired,
 };

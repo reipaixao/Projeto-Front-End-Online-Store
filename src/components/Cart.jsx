@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import AddToCart from './AddToCart';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -28,7 +27,7 @@ class Cart extends React.Component {
     if (cartArray) {
       const allinventory = cartArray
         .map((product, index) => (
-          [product.id, (product.available_quantity - cartCounter[index][1])]
+          [product.id, (product.available_quantity - cartCounter[index][1]), false]
         ));
       this.setState(() => ({ inventory: allinventory }));
     }
@@ -42,21 +41,24 @@ class Cart extends React.Component {
       .find((element) => element[0][0] === id)[1];
     if (target.name === 'add') {
       inventory[findIndex][1] -= 1;
+      if (inventory[findIndex][1] === 0) {
+        inventory[findIndex][2] = true;
+      }
     } else {
+      inventory[findIndex][2] = false;
       inventory[findIndex][1] += 1;
     }
-    // if (inventory[findIndex][1] === ) {
-
-    // }
+    return inventory[findIndex][2];
   }
 
   addOrSubProduct = (event) => {
     const { target, target: { name } } = event;
+    const { cartCounter } = this.state;
     const id = target.getAttribute('data-id');
-    const arrayCounter = JSON.parse(localStorage.getItem('arrayCounter'));
+    const arrayCounter = cartCounter;
     const arrayFound = arrayCounter.find((idAndCounter) => idAndCounter[0] === id);
-    this.addOrSubInventory(event);
-    if (name === 'add') {
+    const block = this.addOrSubInventory(event);
+    if (name === 'add' && !block) {
       arrayFound[1] += 1;
       this.setState(({ counter }) => ({ counter: counter + 1 }));
     } else {
@@ -74,15 +76,16 @@ class Cart extends React.Component {
       arrayCounter[findIndex] = arrayFound;
       localStorage.setItem('arrayCounter', JSON.stringify(arrayCounter));
       this.setState(() => ({
-        cartCounter: JSON.parse(localStorage.getItem('arrayCounter')),
+        cartCounter: arrayCounter,
       }));
     }
   }
 
   removeProduct = ({ target }) => {
     const id = target.getAttribute('data-id');
-    const arrayCounter = JSON.parse(localStorage.getItem('arrayCounter'));
-    const cartArray = JSON.parse(localStorage.getItem('cartArray'));
+    const { cartCounter, cartArray: arrayProduct } = this.state;
+    const arrayCounter = cartCounter;
+    const cartArray = arrayProduct;
     const findIndex = arrayCounter
       .map((a, i) => [a, i])
       .find((element) => element[0][0] === id)[1];
@@ -93,16 +96,10 @@ class Cart extends React.Component {
     localStorage.setItem('arrayCounter', JSON.stringify(arrayCounter));
     localStorage.setItem('cartArray', JSON.stringify(cartArray));
     this.setState(() => ({
-      cartArray: JSON.parse(localStorage.getItem('cartArray')),
-      cartCounter: JSON.parse(localStorage.getItem('arrayCounter')),
+      cartArray,
+      cartCounter: arrayCounter,
     }));
   }
-
-  // Requisito 14
-  // findProduct = (idParam) => {
-  //   const { cartArray } = this.state;
-  //   return cartArray.find(({ id }) => id === idParam);
-  // }
 
   mapStorage = (cartArray) => {
     const { cartCounter } = this.state;
@@ -114,7 +111,7 @@ class Cart extends React.Component {
           <button data-id={ id } onClick={ this.removeProduct } type="submit">X</button>
           <img src={ thumbnail } alt={ title } />
           <span data-testid="shopping-cart-product-quantity">
-            {`Quantidade: ${cartCounter[index][1]}`}
+            {cartCounter[index][1]}
           </span>
           <Link
             to={ {
@@ -125,15 +122,6 @@ class Cart extends React.Component {
             Detalhes
           </Link>
           <button
-            data-testid="product-decrease-quantity"
-            name="subtract"
-            data-id={ id }
-            onClick={ this.addOrSubProduct }
-            type="submit"
-          >
-            -
-          </button>
-          <button
             data-testid="product-increase-quantity"
             name="add"
             data-id={ id }
@@ -142,9 +130,15 @@ class Cart extends React.Component {
           >
             +
           </button>
-          {/*
-            <AddToCart product={ () => this.findProduct(id) } dataId="product-add-to-cart" />
-          */}
+          <button
+            data-testid="product-decrease-quantity"
+            name="subtract"
+            data-id={ id }
+            onClick={ this.addOrSubProduct }
+            type="submit"
+          >
+            -
+          </button>
         </div>
       );
     }));

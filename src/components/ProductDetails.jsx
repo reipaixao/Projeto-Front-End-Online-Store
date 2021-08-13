@@ -15,6 +15,10 @@ class ProductDetails extends Component {
     };
   }
 
+  updateCounter = () => {
+    this.setState(({ counter }) => ({ counter: counter + 1 }));
+  }
+
   render() {
     const { location: { state: { product, product: {
       title, thumbnail, tags, price, shipping,
@@ -38,7 +42,7 @@ class ProductDetails extends Component {
             </ul>
           </nav>
           <AddToCart
-            // upda
+            updateCounter={ this.updateCounter }
             dataId="product-detail-add-to-cart"
             product={ product }
           />

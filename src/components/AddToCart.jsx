@@ -13,7 +13,7 @@ class AddToCart extends React.Component {
   addCounterStorage = () => {
     const { product } = this.props;
     let counter = JSON.parse(localStorage.getItem('counter'));
-    const verifyInventory = product.available_quantity - (counter + 1);
+    const verifyInventory = product.available_quantity - counter;
     if (verifyInventory >= 0) {
       counter += 1;
       localStorage.setItem('counter', counter);

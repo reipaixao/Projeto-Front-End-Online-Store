@@ -20,7 +20,7 @@ class ProductList extends Component {
   }
 
   updateCounter = () => {
-    this.setState(() => ({ counter: JSON.parse(localStorage.getItem('counter')) }));
+    this.setState(({ counter }) => ({ counter: counter + 1 }));
   }
 
   handleChange = ({ target: { name, value } }) => {

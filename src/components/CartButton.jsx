@@ -3,14 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class CartButton extends React.Component {
-  constructor({ counter }) {
-    super({ counter });
-
-    this.state = {
-      counter,
-    };
-  }
-
   componentDidMount() {
     this.setCounterStorage();
   }
@@ -23,7 +15,7 @@ class CartButton extends React.Component {
   }
 
   render() {
-    const { counter } = this.state;
+    const { counter } = this.props;
     return (
       <div>
         <Link to="/cart" data-testid="shopping-cart-button">

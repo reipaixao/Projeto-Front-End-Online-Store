@@ -8,6 +8,7 @@ class Checkout extends Component {
       <div>
         <Clienteinfo />
         <PaymentMethods />
+        <button type="submit">Finalizar Compra</button>
       </div>
     );
   }

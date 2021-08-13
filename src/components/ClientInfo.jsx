@@ -23,9 +23,9 @@ export default class ClientInfo extends Component {
   fieldForm(...parameters) {
     return (
       <div>
-        <label htmlFor={ parameters[0] }>
+        <label htmlFor={ parameters[1] }>
           <input
-            data-testid={ parameters[1] }
+            data-testid={ parameters[0] }
             type={ parameters[2] }
             id={ parameters[3] }
             name={ parameters[4] }

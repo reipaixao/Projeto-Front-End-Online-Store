@@ -71,5 +71,5 @@ export default class PaymentMethods extends Component {
 }
 
 PaymentMethods.propTypes = {
-  onChange: PropTypes.func.isRequired,
-};
+  onChange: PropTypes.func,
+}.isRequired;

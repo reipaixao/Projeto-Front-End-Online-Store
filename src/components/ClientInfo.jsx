@@ -72,5 +72,5 @@ export default class ClientInfo extends Component {
 }
 
 ClientInfo.propTypes = {
-  onChange: PropTypes.func.isRequired,
-};
+  onChange: PropTypes.func,
+}.isRequired;
